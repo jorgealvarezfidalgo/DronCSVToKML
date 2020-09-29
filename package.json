@@ -1,0 +1,17 @@
+{
+  "name": "DronCSVToKML",
+  "version": "0.5.0",
+  "description": "Registro vuelo dron en CSV a KML",
+  "main": "main.js",
+  "scripts": {
+    "build": "browserify js/conversor.js > main.js"
+  },
+  "bin": {},
+  "author": "Jorge Fidalgo <UO258524@uniovi.es>",
+  "devDependencies": {},
+  "dependencies": {
+    "browserify": "^16.5.2",
+    "csv": "^5.3.2",
+    "jquery": "^3.5.1"
+  }
+}

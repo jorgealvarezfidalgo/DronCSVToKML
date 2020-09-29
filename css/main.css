@@ -1,0 +1,87 @@
+
+
+h1 {
+	color: black;
+	font-size: 2.375em;
+}
+
+h2 {
+	font-size: 1.750em;
+	text-align: center;
+}
+
+p {
+	font-size: 1.25em;
+}
+
+.CodeMirror {
+	border: 0.063em solid #eee;
+	height: auto;
+}
+
+.centerdiv {
+	display: flex;
+	justify-content: center;
+}
+
+.btn {
+	box-shadow: 0 0.063em 0 0 #f0f7fa;
+	background-color: #333;
+	border-radius: 0.375em;
+	border: 0.063em solid darkred;
+	cursor: pointer;
+	color: #ffffff;
+	font-family: CaslonAntique, serif;
+	font-size: 1.25em;
+	font-weight: bold;
+	padding: 0.375em 1.5em;
+	text-decoration: none;
+	text-shadow: 0 -0.063em 0 #5b6178;
+	display: inline-block;
+}
+
+.btn:hover {
+	background-color: darkred;
+}
+
+.btn:active {
+	position: relative;
+	top: 0.063em;
+}
+
+.icon-bar {
+	font-family: CaslonAntiqueBold, serif;
+	width: 45.1%;
+	background-color: #555;
+	overflow: auto;
+	height: 10%;
+	margin-left: 1.65em;
+	margin-right: 1.65em;
+	margin-top: 2em;
+}
+
+.icon-bar a,
+.icon-bar label {
+	float: left;
+	text-align: center;
+	width: 25%;
+	padding: 0.625em 0;
+	transition: all 0.3s ease;
+	color: white;
+	text-decoration: none;
+	cursor: pointer;
+	font-size: 1.5em;
+}
+
+.icon-bar a:hover {
+	background-color: #000;
+}
+
+input {
+	display: none;
+}
+
+footer {
+	text-align: center;
+}
+

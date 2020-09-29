@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Dron-CSV a KML</title>
+
+    <link rel="stylesheet" href="./css/main.css">
+    <link rel="stylesheet" href="./lib/codemirror-5.51.0/lib/codemirror.css">
+    <link rel="stylesheet" href="./lib/codemirror-5.51.0/theme/ayu-mirage.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    <link rel="icon" type="image/png" sizes="16x16" href="../static/img/favicon-16x16.png">
+
+    <script src="./lib/codemirror-5.51.0/lib/codemirror.js"></script>
+    <script src="./lib/codemirror-5.51.0/mode/xml/xml.js"></script>
+    <script src="./lib/codemirror-5.51.0/mode/csv/mathematica.js"></script>
+
+</head>
+
+<body>
+
+    <section id=demo>
+        <h2>Dron-CSV a KML</h2>
+        <div class="centerdiv">
+            <button id="csvtokml" class="btn">Generar KML</button>
+        </div>
+        <div class="centerdiv">
+            <div class="icon-bar">
+                <a id="borrarcsv"><i class="fa fa-trash"></i></a>
+                <label for="fileInput"><i class="fa fa-upload"></i></label>
+                <input type="file" id="fileInput"></input>
+            </div>
+            <div class="icon-bar">
+                <a id="borrarkml"><i class="fa fa-trash"></i></a>
+                <a id="dwnkml-btn"><i class="fa fa-download"></i></a>
+            </div>
+        </div>
+        <div class="centerdiv">
+            <label for="csvtext"></label><textarea id="csvtext">
+        </textarea>
+            <label for="kmltext"></label><textarea id="kmltext">
+        </textarea>
+        </div>
+
+    </section>
+    <footer>
+        © 2020 Jorge Álvarez Fidalgo - MIW
+    </footer>
+    <script src="./main.js"></script>
+</body>
+
+</html>
