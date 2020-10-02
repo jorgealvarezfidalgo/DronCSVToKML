@@ -1,5 +1,5 @@
 (function(){function r(e,n,t){function o(i,f){if(!n[i]){if(!e[i]){var c="function"==typeof require&&require;if(!f&&c)return c(i,!0);if(u)return u(i,!0);var a=new Error("Cannot find module '"+i+"'");throw a.code="MODULE_NOT_FOUND",a}var p=n[i]={exports:{}};e[i][0].call(p.exports,function(r){var n=e[i][1][r];return o(n||r)},p,p.exports,r,e,n,t)}return n[i].exports}for(var u="function"==typeof require&&require,i=0;i<t.length;i++)o(t[i]);return o}return r})()({1:[function(require,module,exports){
-const parse  = require('csv-parse');
+const parse = require('csv-parse');
 const $ = require('jquery');
 
 let csvEditor;
@@ -13,80 +13,79 @@ let kmlEditor;
 function csvtokml() {
 
     const input = csvEditor.getValue();
-	//Parseamos el CSV a Array
-	parse(input, {
-	  comment: '#'
-	}, function(err, output){
-		if(err) {
-			console.log(err);
-		}
-		else {
-			let kml = generarKML(output);
-			kmlEditor.setValue(kml);
-		}
-		
-	}) 
+    //Parseamos el CSV a Array
+    parse(input, {
+        comment: '#'
+    }, function(err, output) {
+        if (err) {
+            alert("Se ha producido un error al parsear el CSV de entrada.");
+        } else {
+            let kml = generarKML(output);
+            kmlEditor.setValue(kml);
+        }
+
+    })
 }
 
 function generarKML(parsedcsv) {
-	//Buscar el índice de los términos clave
-	let headers = parsedcsv[0];
-	let latitude_index = headers.indexOf("latitude");
-	let longitude_index = headers.indexOf("longitude");
-	let altitude_index = headers.indexOf("altitude_above_seaLevel(feet)");
-	let speed_index = headers.indexOf("speed(mph)");
-	
-	let position = "";
-	
-	for(let i = 1; i < parsedcsv.length; i++) {
-		let latitude = parsedcsv[i][latitude_index];
-		let longitude = parsedcsv[i][longitude_index];
-		let altitude = parsedcsv[i][altitude_index] * 0.3048;	// De pies a metros
-		let speed = parsedcsv[i][speed_index] * 1.609344;	//De mph a kmh
-		
-		position += longitude + "," + latitude + "," + altitude + "\n";
-	}
-	
-	let kml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
-				'<kml xmlns="http://www.opengis.net/kml/2.2">\n' +
-				'<Document id="KMLDron">\n' +
-				'<Placemark>\n' +
-				'<name>RutaDron</name>\n' +
-				'<description>KML generado a partir del registro de vuelo.</description>\n' +
-				'<LineString>\n' +
-				'<tessellate>1</tessellate>\n' +
-				'<coordinates>\n' +
-				position +
-				'\n</coordinates>\n' +
-				'<altitudeMode>absolute</altitudeMode>\n' +
-				'</LineString>\n' +
-				'<Style>' +
-				'  <LineStyle>' +
-				'   <color>#ff0000ff</color>' +
-				'  <width>5</width>' +
-				'  </LineStyle>' +
-				' </Style>' +
-				'</Placemark>\n' +
-				'<Placemark>\n' +
-				'<name>SombraRuta</name>\n' +
-				'<description>Sombra de la ruta.</description>\n' +
-				'<LineString>\n' +
-				'<tessellate>1</tessellate>\n' +
-				'<coordinates>\n' +
-				position +
-				'\n</coordinates>\n' +
-				'<altitudeMode>clampToGround</altitudeMode>\n' +
-				'</LineString>\n' +
-				'<Style>' +
-				'  <LineStyle>' +
-				'   <color>#ff000000</color>' +
-				'  <width>5</width>' +
-				'  </LineStyle>' +
-				' </Style>' +
-				'</Placemark>\n' +
-				'</Document>\n' +
-				'</kml>';
-	return kml;
+    //Buscar el índice de los términos clave
+    let headers = parsedcsv[0];
+    let latitude_index = headers.indexOf("latitude");
+    let longitude_index = headers.indexOf("longitude");
+    let altitude_index = headers.indexOf("altitude_above_seaLevel(feet)");
+    let speed_index = headers.indexOf("speed(mph)");
+
+    let position = "";
+
+    for (let i = 1; i < parsedcsv.length; i++) {
+        let latitude = parsedcsv[i][latitude_index];
+        let longitude = parsedcsv[i][longitude_index];
+        let altitude = parsedcsv[i][altitude_index] * 0.3048; // De pies a metros
+        let speed = parsedcsv[i][speed_index] * 1.609344; //De mph a kmh
+
+        position += longitude + "," + latitude + "," + altitude + "\n";
+    }
+
+    let kml = '<?xml version="1.0" encoding="UTF-8"?>\n' +
+        '<kml xmlns="http://www.opengis.net/kml/2.2">\n' +
+        '<Document id="KMLDron">\n' +
+        '<Placemark>\n' +
+        '<name>RutaDron</name>\n' +
+        '<description>KML generado a partir del registro de vuelo.</description>\n' +
+        '<LineString>\n' +
+        '<tessellate>1</tessellate>\n' +
+        '<coordinates>\n' +
+        position +
+        '\n</coordinates>\n' +
+        '<altitudeMode>absolute</altitudeMode>\n' +
+        '</LineString>\n' +
+        '<Style>' +
+        '  <LineStyle>' +
+        '   <color>#ff0000ff</color>' +
+        '  <width>5</width>' +
+        '  </LineStyle>' +
+        ' </Style>' +
+        '</Placemark>\n' +
+        '<Placemark>\n' +
+        '<name>SombraRuta</name>\n' +
+        '<description>Sombra de la ruta.</description>\n' +
+        '<LineString>\n' +
+        '<tessellate>1</tessellate>\n' +
+        '<coordinates>\n' +
+        position +
+        '\n</coordinates>\n' +
+        '<altitudeMode>clampToGround</altitudeMode>\n' +
+        '</LineString>\n' +
+        '<Style>' +
+        '  <LineStyle>' +
+        '   <color>#ff000000</color>' +
+        '  <width>5</width>' +
+        '  </LineStyle>' +
+        ' </Style>' +
+        '</Placemark>\n' +
+        '</Document>\n' +
+        '</kml>';
+    return kml;
 }
 
 // INTERFAZ //
@@ -94,7 +93,7 @@ function generarKML(parsedcsv) {
 /**
  * Creamos el editor de CSV
  */
-if(document.getElementById("csvtext") !== null) {
+if (document.getElementById("csvtext") !== null) {
     csvEditor = CodeMirror.fromTextArea(document.getElementById("csvtext"), {
         mode: "mathematica",
         lineNumbers: true
@@ -105,7 +104,7 @@ if(document.getElementById("csvtext") !== null) {
 /**
  * Creamos el editor de KML
  */
-if(document.getElementById("kmltext") !== null) {
+if (document.getElementById("kmltext") !== null) {
     kmlEditor = CodeMirror.fromTextArea(document.getElementById("kmltext"), {
         mode: "xml",
         lineNumbers: true
@@ -156,8 +155,8 @@ function download(filename, text) {
 /**
  * Descarga el contenido del editor de KML.
  */
-if(document.getElementById("dwnkml-btn")) {
-    document.getElementById("dwnkml-btn").addEventListener("click", function(){
+if (document.getElementById("dwnkml-btn")) {
+    document.getElementById("dwnkml-btn").addEventListener("click", function() {
         let text = kmlEditor.getValue();
         let filename = "dron.kml";
 
@@ -170,24 +169,22 @@ window.onload = function() {
     let fileInput = document.getElementById('fileInput');
 
     fileInput.addEventListener('change', function(e) {
-      let file = fileInput.files[0];
-	  var regex = /^(.)+(.csv|.txt)$/;
-     
-     if (regex.test(file.name)) {
-		  let reader = new FileReader();
-		  
-		  reader.onload = function(e) {
-			console.log(reader.result);
-            csvEditor.setValue(reader.result);
-		  }
-		  reader.readAsText(file)
+        let file = fileInput.files[0];
+        var regex = /^(.)+(.csv|.txt)$/;
 
-		} else {
-		  alert("Por favor, cargue un archivo CSV válido.");
-		}
+        if (regex.test(file.name)) {
+            let reader = new FileReader();
+
+            reader.onload = function(e) {
+                csvEditor.setValue(reader.result);
+            }
+            reader.readAsText(file)
+
+        } else {
+            alert("Por favor, cargue un archivo CSV válido.");
+        }
     });
 }
-
 },{"csv-parse":7,"jquery":13}],2:[function(require,module,exports){
 'use strict'
 

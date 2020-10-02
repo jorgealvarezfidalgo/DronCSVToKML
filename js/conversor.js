@@ -17,7 +17,7 @@ function csvtokml() {
         comment: '#'
     }, function(err, output) {
         if (err) {
-            console.log(err);
+            alert("Se ha producido un error al parsear el CSV de entrada.");
         } else {
             let kml = generarKML(output);
             kmlEditor.setValue(kml);
